@@ -255,6 +255,16 @@ const I18N = {
     lt:'Pakeiskite pavadinimą (palikite tuščią ir spauskite OK, kad ištrintumėte):',
     fi:'Muuta nimeä (jätä tyhjäksi ja paina OK poistaaksesi):'
   },
+  stopInfoLinesHeading: { ru:'Линии через эту остановку', pl:'Linie przez ten przystanek', en:'Lines through this stop', de:'Linien über diese Haltestelle', et:'Liinid selle peatuse kaudu', lt:'Maršrutai per šią stotelę', fi:'Pysäkin kautta kulkevat linjat' },
+  stopInfoNoLines: {
+    ru:'Через эту остановку пока не проходит ни одна линия.',
+    pl:'Przez ten przystanek nie przechodzi jeszcze żadna linia.',
+    en:'No lines pass through this stop yet.',
+    de:'Es verkehrt noch keine Linie über diese Haltestelle.',
+    et:'Selle peatuse kaudu ei sõida veel ükski liin.',
+    lt:'Per šią stotelę dar nevažiuoja joks maršrutas.',
+    fi:'Yksikään linja ei vielä kulje tämän pysäkin kautta.'
+  },
   uploadMapImage: { ru:'Загрузить карту игры', pl:'Wczytaj mapę gry', en:'Upload game map', de:'Spielkarte hochladen', et:'Laadi üles mängu kaart', lt:'Įkelti žaidimo žemėlapį', fi:'Lataa pelin kartta' },
   previewMapImage: { ru:'Предпросмотр картинки (только у меня)', pl:'Podgląd obrazu (tylko u mnie)', en:'Preview image (only for me)', de:'Bildvorschau (nur bei mir)', et:'Pildi eelvaade (ainult minul)', lt:'Peržiūrėti paveikslėlį (tik man)', fi:'Esikatsele kuvaa (vain minulle)' },
   resetMapImage: { ru:'Вернуть карту из репозитория', pl:'Przywróć mapę z repozytorium', en:'Restore map from repository', de:'Karte aus dem Repository wiederherstellen', et:'Taasta kaart repositooriumist', lt:'Atkurti žemėlapį iš saugyklos', fi:'Palauta kartta arkistosta' },
