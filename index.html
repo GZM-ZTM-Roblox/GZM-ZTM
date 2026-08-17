@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Маршруты и расписание</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="stripebar"></div>
+
+<div class="a11y">
+  <div class="grp">
+    <span class="grp-label" data-i18n="a11yTextSize">Text size</span>
+    <button data-fs="default" class="active" data-i18n="a11yDefault">Default</button>
+    <button data-fs="large" data-i18n="a11yLarge">Large</button>
+    <button data-fs="xlarge" data-i18n="a11yXLarge">Extra large</button>
+  </div>
+  <div class="grp">
+    <span class="grp-label" data-i18n="a11yContrast">Contrast</span>
+    <button data-contrast="normal" class="active" data-i18n="a11yDefault">Default</button>
+    <button data-contrast="high" data-i18n="a11yHighContrast">High contrast</button>
+  </div>
+  <div class="grp">
+    <span class="grp-label" data-i18n="a11yTheme">Theme</span>
+    <button data-theme="dark" class="active" data-i18n="a11yThemeDark">Dark</button>
+    <button data-theme="light" data-i18n="a11yThemeLight">Light</button>
+  </div>
+</div>
+
+<div class="shell">
+  <aside class="sidebar">
+    <div class="sidebar-brand" id="sidebarBrand">
+      <div class="logomark">GZM</div>
+      <div>
+        <div class="eyebrow" data-i18n="eyebrow">GZM · ZTM KATOWICE</div>
+        <h1 data-i18n="title">Routes & Schedules</h1>
+      </div>
+    </div>
+    <div id="sidebarnav"></div>
+    <div id="authbox"></div>
+    <div class="langpills" id="langpills"></div>
+    <div class="ainote" data-i18n="aiNote">Interface translated automatically by AI.</div>
+  </aside>
+
+  <main class="content" id="page-root"></main>
+</div>
+
+<footer><span data-i18n="footer">Sample schedule data.</span></footer>
+
+<script src="js/data.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
