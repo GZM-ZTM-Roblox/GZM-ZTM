@@ -14,41 +14,21 @@
    ============================================================ */
 let MAP_IMAGE_URL = 'assets/map.jpg';
 
-let STOPS = [
-  { id:'s1',  name:'Katowice Dworzec',          x:'18%', y:'70%' },
-  { id:'s2',  name:'Katowice Rynek',            x:'30%', y:'55%' },
-  { id:'s3',  name:'Katowice Plac Wolności',    x:'34%', y:'46%' },
-  { id:'s4',  name:'Chorzów Rynek',             x:'40%', y:'20%' },
-  { id:'s5',  name:'Chorzów Batory',            x:'40%', y:'12%' },
-  { id:'s6',  name:'Sosnowiec Pogoń',           x:'70%', y:'26%' },
-  { id:'s7',  name:'Sosnowiec Centrum',         x:'64%', y:'24%' },
-  { id:'s8',  name:'Katowice Zawodzie',         x:'44%', y:'40%' },
-  { id:'s9',  name:'Katowice Ligota',           x:'22%', y:'62%' },
-  { id:'s10', name:'Zabrze Biskupice',          x:'6%',  y:'34%' },
-  { id:'s11', name:'Zabrze Centrum',            x:'8%',  y:'30%' },
-  { id:'s12', name:'Ruda Śląska',               x:'10%', y:'28%' },
-  { id:'s13', name:'Gliwice Sośnica',           x:'6%',  y:'20%' },
-  { id:'s14', name:'Gliwice Zajezdnia',         x:'5%',  y:'16%' },
-  { id:'s15', name:'Bytom Dworzec',             x:'40%', y:'8%'  },
-  { id:'s16', name:'Bytom Karb',                x:'38%', y:'10%' },
-  { id:'s17', name:'Chorzów Stadion Śląski',    x:'40%', y:'16%' },
-  { id:'s18', name:'Katowice Piotrowice',       x:'55%', y:'70%' },
-  { id:'s19', name:'Mikołów Rynek',             x:'62%', y:'76%' },
-  { id:'s20', name:'Tychy Ustroń',              x:'68%', y:'80%' },
-  { id:'s21', name:'Tychy Miasto',              x:'70%', y:'78%' },
-];
+/* Остановки пока пустые — расставляются на странице "Карта" в
+   режиме администратора (клик по карте). */
+let STOPS = [];
 
 let ROUTES = [
   { id:'6',  type:'bus',  color:'#ef4444', from:'Katowice Dworzec', to:'Chorzów Batory',
-    stops:['s1','s2','s3','s4','s5'], times:['07:04','07:16','07:28','07:40'] },
+    stops:[], times:['07:04','07:16','07:28','07:40'] },
   { id:'11', type:'tram', color:'#3b82f6', from:'Sosnowiec Pogoń', to:'Katowice Ligota',
-    stops:['s6','s7','s8','s2','s9'], times:['06:58','07:13','07:28','07:43'] },
+    stops:[], times:['06:58','07:13','07:28','07:43'] },
   { id:'23', type:'bus', color:'#22c55e', from:'Zabrze Biskupice', to:'Gliwice Zajezdnia',
-    stops:['s10','s11','s12','s13','s14'], times:['07:02','07:20','07:38','07:56'] },
+    stops:[], times:['07:02','07:20','07:38','07:56'] },
   { id:'51', type:'trolleybus', color:'#f59e0b', from:'Bytom Dworzec', to:'Chorzów Stadion',
-    stops:['s15','s16','s4','s17','s5'], times:['07:10','07:25','07:40','07:55'] },
+    stops:[], times:['07:10','07:25','07:40','07:55'] },
   { id:'77', type:'tram', color:'#a78bfa', from:'Katowice Ligota', to:'Tychy Miasto',
-    stops:['s9','s18','s19','s20','s21'], times:['06:45','07:05','07:25','07:45'] },
+    stops:[], times:['06:45','07:05','07:25','07:45'] },
 ];
 
 /* Объявления (Teadaanded) — общая информация, не сбои */
