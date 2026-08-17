@@ -564,7 +564,7 @@ function renderMapPage(root){
   mapbox.addEventListener('touchmove', (e)=>{ if(e.touches.length===1) dragMove(e.touches[0].clientX, e.touches[0].clientY); }, {passive:true});
   mapbox.addEventListener('touchend', dragEnd);
 
-  // --- клик = добавить/редактировать остановку (но не если это был драг) ---
+  // --- клик по пустому месту карты = добавить остановку (только админ) ---
   if(isAdmin){
     document.getElementById('mapImageInput').addEventListener('change', (e)=>{
       const file = e.target.files[0];
@@ -591,24 +591,82 @@ function renderMapPage(root){
       toast(t('adminSaved'));
       renderMapPage(root);
     });
-    inner.querySelectorAll('.stopdot').forEach(dot=>{
-      dot.addEventListener('click', (e)=>{
-        e.stopPropagation();
-        if(dragDist > 4) return;
-        const id = dot.dataset.stopId;
-        const stop = STOPS.find(s=>s.id===id);
-        const result = prompt(t('promptStopRename'), stop.name);
-        if(result === null) return; // отмена
-        if(!result.trim()){
-          STOPS = STOPS.filter(s=>s.id!==id);
-          ROUTES.forEach(r=> r.stops = r.stops.filter(sid=>sid!==id));
-          toast(t('adminDeleted'));
-        } else {
-          stop.name = result.trim();
-          toast(t('adminSaved'));
-        }
-        renderMapPage(root);
-      });
+  }
+
+  // --- клик по САМОЙ точке = попап с названием и линиями (для ВСЕХ, не только админа) ---
+  inner.querySelectorAll('.stopdot').forEach(dot=>{
+    dot.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      if(dragDist > 4) return;
+      openStopInfoModal(dot.dataset.stopId, root);
+    });
+  });
+}
+
+/* ---------- попап остановки: название + какие линии через неё едут ---------- */
+function openStopInfoModal(stopId, mapRoot){
+  const stop = STOPS.find(s=>s.id===stopId);
+  if(!stop) return;
+  const linesHere = ROUTES.filter(r => r.stops.includes(stopId));
+
+  const overlay = document.createElement('div');
+  overlay.className = 'modal-overlay';
+  overlay.innerHTML = `
+    <div class="modal-box">
+      <h3>${ICONS.pin}${escapeHtml(stop.name)}</h3>
+      <div class="stopinfo-lines-label">${t('stopInfoLinesHeading')}</div>
+      <div class="stopinfo-lines">
+        ${linesHere.length === 0
+          ? `<p class="lead" style="margin:0;">${t('stopInfoNoLines')}</p>`
+          : linesHere.map(r => `
+            <button class="linebtn stopinfo-linebtn" data-goto-route="${r.id}">
+              <span class="num" style="background:${r.color}">${r.id}</span>
+              ${vehicleIcon(r.type)}
+              <span class="dir">${r.from} \u2192 ${r.to}</span>
+            </button>`).join('')}
+      </div>
+      ${isAdmin ? `
+        <div class="modal-actions" style="margin-top:16px;">
+          <button class="ghostbtn small" id="stopinfo-rename">${ICONS.edit}${t('adminEdit')}</button>
+          <button class="ghostbtn small danger" id="stopinfo-delete">${ICONS.trash}${t('adminDelete')}</button>
+        </div>
+      ` : ''}
+      <div class="modal-actions" style="margin-top:10px;">
+        <button class="ghostbtn" id="stopinfo-close">${t('loginCancel')}</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+  const close = ()=> overlay.remove();
+  overlay.addEventListener('click', (e)=>{ if(e.target === overlay) close(); });
+  document.getElementById('stopinfo-close').addEventListener('click', close);
+
+  overlay.querySelectorAll('[data-goto-route]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{ close(); goPage('timetables', {route:btn.dataset.gotoRoute, filter:'all'}); });
+  });
+
+  if(isAdmin){
+    document.getElementById('stopinfo-rename').addEventListener('click', ()=>{
+      const result = prompt(t('promptStopRename'), stop.name);
+      if(result === null) return;
+      if(!result.trim()){
+        STOPS = STOPS.filter(s=>s.id!==stopId);
+        ROUTES.forEach(r=> r.stops = r.stops.filter(sid=>sid!==stopId));
+        toast(t('adminDeleted'));
+      } else {
+        stop.name = result.trim();
+        toast(t('adminSaved'));
+      }
+      close();
+      renderMapPage(mapRoot);
+    });
+    document.getElementById('stopinfo-delete').addEventListener('click', ()=>{
+      if(!confirm(t('adminConfirmDelete'))) return;
+      STOPS = STOPS.filter(s=>s.id!==stopId);
+      ROUTES.forEach(r=> r.stops = r.stops.filter(sid=>sid!==stopId));
+      toast(t('adminDeleted'));
+      close();
+      renderMapPage(mapRoot);
     });
   }
 }
