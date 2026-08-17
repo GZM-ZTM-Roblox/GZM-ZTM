@@ -306,6 +306,15 @@ html.theme-light .stopdot{border-color:#ffffff;}
 .mapbox.admin-editable .stopdot{cursor:pointer;}
 .mapupload-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap;}
 
+.stopinfo-lines-label{
+  font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);
+  font-weight:600;margin:4px 0 8px;
+}
+.stopinfo-lines{display:flex;flex-direction:column;gap:6px;max-height:240px;overflow-y:auto;}
+.stopinfo-linebtn{width:100%;}
+.ghostbtn.danger{border-color:var(--border);}
+.ghostbtn.danger:hover{border-color:#ef4444;color:#ef4444;}
+
 .stop-picker{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
 .stopchip{
   display:flex;align-items:center;gap:6px;
